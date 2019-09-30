@@ -142,11 +142,12 @@
         [SVProgressHUD showErrorWithStatus:@"图片没有下载完毕！"];
         return;
     }
+    UIImage *image = self.imageView.image;
     //获取相册权限
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
         if (status == PHAuthorizationStatusAuthorized) {
             [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-                [PHAssetChangeRequest creationRequestForAssetFromImage:self.imageView.image];
+                [PHAssetChangeRequest creationRequestForAssetFromImage:image];
             } completionHandler:^(BOOL success, NSError * _Nullable error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (success) {
@@ -191,9 +192,7 @@
         self.scrollView.minimumZoomScale = 1;
         self.scrollView.zoomScale = 1;
     }
-    
-    [SVProgressHUD showProgress:0 status:@"正在下载高清图"];
-    
+
     __weak typeof(self)weakSelf = self;
     NSLog(@"大图：%@",model.regularUrl.absoluteString);
     // 下载大图片
