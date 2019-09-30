@@ -33,6 +33,8 @@
 @property(nonatomic,assign)NSInteger page;
 /// 正在加载中标识
 @property(nonatomic,assign)BOOL isLoading;
+/// 图片位置label
+@property(nonatomic,strong)UILabel *numLabel;
 @end
 
 @implementation SGMainViewController
@@ -58,12 +60,12 @@
     [SGTools blurEffect:self.bgImageV];//设置毛玻璃效果
     [self.view addSubview:self.cardCollectionVIew];
     [self.view addSubview:self.titleLabel];
-
+    [self.view addSubview:self.numLabel];
 }
 
 /**
  获取图片列表数据
-
+ 
  @param page 页码，从1开始
  */
 - (void)getDataWithPag:(NSInteger)page
@@ -136,7 +138,7 @@
 
 /**
  scrollView将要开始滑动
-
+ 
  @param scrollView  scrollView
  */
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -183,6 +185,7 @@
     SGPageItemModel *model = self.mainVM.dataAry[currentIndex];
     [self.bgImageV sd_setImageWithURL:model.thumbUrl placeholderImage:[UIImage imageNamed:@"zhanweitu"]];
     self.titleLabel.text = model.title;
+    self.numLabel.text = [NSString stringWithFormat:@"第%ld张图片",currentIndex+1];
     [self.cardCollectionVIew scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:currentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     
     
@@ -226,7 +229,7 @@
 - (UILabel *)titleLabel
 {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 40, SGScreenW-20, 100)];
+        _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 40, SGScreenW-20, 40)];
         _titleLabel.text = @"编辑推荐";
         _titleLabel.numberOfLines = 1;
         _titleLabel.font = [UIFont systemFontOfSize:18];
@@ -234,5 +237,18 @@
         _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLabel;
+}
+
+- (UILabel *)numLabel
+{
+    if (!_numLabel) {
+        _numLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, SGScreenH-60, SGScreenW-20, 40)];
+        _numLabel.text = @"第1张图片";
+        _numLabel.numberOfLines = 1;
+        _numLabel.font = [UIFont systemFontOfSize:16];
+        _numLabel.textColor = [UIColor blackColor];
+        _numLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _numLabel;
 }
 @end

@@ -192,30 +192,12 @@
         self.scrollView.minimumZoomScale = 1;
         self.scrollView.zoomScale = 1;
     }
-
-    __weak typeof(self)weakSelf = self;
     NSLog(@"大图：%@",model.regularUrl.absoluteString);
     // 下载大图片
     [self.imageView sd_setImageWithURL:model.regularUrl placeholderImage:_image options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
         [SVProgressHUD showProgress:1.0 * receivedSize / expectedSize status:@"正在下载高清图"];
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [SVProgressHUD dismiss];
-        if (image&&!error) {
-            // 图片尺寸
-            CGFloat pictureW = SGScreenW;
-            CGFloat pictureH = pictureW * image.size.height / image.size.width;
-            if (pictureH > SGScreenH) { // 图片显示高度超过一个屏幕, 需要滚动查看
-                weakSelf.imageView.frame = CGRectMake(0, 0, pictureW, pictureH);
-                weakSelf.scrollView.contentSize = CGSizeMake(0, pictureH);
-            } else {
-                weakSelf.imageView.size = CGSizeMake(pictureW, pictureH);
-                weakSelf.imageView.centerY = SGScreenH * 0.5;
-            }
-            weakSelf.scrollView.maximumZoomScale = MAX(image.size.width / SGScreenW * 2, 2);
-            weakSelf.scrollView.minimumZoomScale = 1;
-            weakSelf.scrollView.zoomScale = 1;
-        }
-        
     }];
 }
 /**

@@ -27,6 +27,8 @@
     self.window.rootViewController = mainVC;
     [self.window makeKeyAndVisible];
     
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+
     return YES;
 }
 
