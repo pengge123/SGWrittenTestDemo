@@ -1,0 +1,38 @@
+//
+//  PrefixHeader.pch
+//  SGWrittenTestDemo
+//
+//  Created by Mac on 2019/9/29.
+//  Copyright © 2019 QinPeng. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <UIKit/UIKit.h>
+#import "SGTools.h"
+#import <SVProgressHUD.h>
+#import <SDWebImage.h>
+#import "UIView+frame.h"
+#define SGScreenW [UIScreen mainScreen].bounds.size.width
+#define SGScreenH [UIScreen mainScreen].bounds.size.height
+
+// 等比例尺寸
+#define SCALEW SGScreenW/375
+#define WeakSelf __weak typeof(self) weakSelf = self;
+#define weakify(var) __weak typeof(var) XYWeak_##var = var;
+#define strongify(var) \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Wshadow\"") \
+__strong typeof(var) var = XYWeak_##var; \
+_Pragma("clang diagnostic pop")
+
+typedef NS_ENUM(NSUInteger, SGPhotosListOrderBy) {
+    SGPhotosListOrderByLatest = 0,
+    SGPhotosListOrderByOldest,
+    SGPhotosListOrderByPopular,
+};
+
+static NSString * const kBaseUrl = @"https://api.unsplash.com/";
+static NSString * const kToken = @"e3166b3ff2fceb9a5327f66717345a49c01c221994a812749d0b42d2a594bc68";
+#endif /* PrefixHeader_pch */

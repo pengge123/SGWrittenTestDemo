@@ -1,0 +1,26 @@
+PODS:
+  - SDWebImage (5.2.0):
+    - SDWebImage/Core (= 5.2.0)
+  - SDWebImage/Core (5.2.0)
+  - SVProgressHUD (2.2.5)
+  - YYModel (1.0.4)
+
+DEPENDENCIES:
+  - SDWebImage
+  - SVProgressHUD
+  - YYModel
+
+SPEC REPOS:
+  trunk:
+    - SDWebImage
+    - SVProgressHUD
+    - YYModel
+
+SPEC CHECKSUMS:
+  SDWebImage: 609192dcf3898c910a2848032372ead951e66364
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
+
+PODFILE CHECKSUM: f088f01be7f2dc72ad46c5dbd88dbde44557b4b4
+
+COCOAPODS: 1.8.1
